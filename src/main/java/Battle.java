@@ -9,14 +9,18 @@ public class Battle {
     private ShipsPack firstPack;
     private ShipsPack secondPack;
 
-    private BattleStrategy battleStrategy;
+//    private BattleStrategy battleStrategy;
 
     public Battle() {
-        battleStrategy = new StandardBattleStrategy();
+        BattleStrategy battleStrategy = new StandardBattleStrategy();
+        firstPack = new ShipsPack(battleStrategy);
+        secondPack = new ShipsPack(battleStrategy);
     }
 
-    public Battle(int i) {
-        battleStrategy = new LocalizedStrategy();
+    public Battle(int localized) {
+        BattleStrategy battleStrategy = new LocalizedStrategy();
+        firstPack = new ShipsPack(battleStrategy);
+        secondPack = new ShipsPack(battleStrategy);
     }
 
     public boolean isInTheWinningSide(Ship ship) {
@@ -27,12 +31,12 @@ public class Battle {
     }
 
     public Battle side(Ship... ships) {
-        firstPack = new ShipsPack(battleStrategy, ships);
+        firstPack.add(ships);
         return this;
     }
 
     public Battle against(Ship... ships) {
-        secondPack = new ShipsPack(battleStrategy, ships);
+        secondPack.add(ships);
         startBattle();
         return this;
     }

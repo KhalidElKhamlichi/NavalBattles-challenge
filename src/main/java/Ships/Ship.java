@@ -30,7 +30,7 @@ public class Ship {
             canons.add(canon);
             totalHp += canon.getHp();
         }
-
+        calculateSpeed(tonsOfDisplacement, numberOfMasts);
     }
 
     public Ship(int tonsOfDisplacement, int numberOfMasts) {

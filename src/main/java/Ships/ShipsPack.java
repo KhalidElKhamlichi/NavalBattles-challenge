@@ -15,9 +15,12 @@ public class ShipsPack {
 
     private final int bonusDamagePercentage = 15;
 
-    public ShipsPack(BattleStrategy battleStrategy, Ship... ships) {
-        this.ships = new ArrayList<>(Arrays.asList(ships));
+    public ShipsPack(BattleStrategy battleStrategy) {
         this.battleStrategy = battleStrategy;
+    }
+
+    public void add(Ship... ships) {
+        this.ships = new ArrayList<>(Arrays.asList(ships));
     }
 
     public boolean has(Ship b) {
