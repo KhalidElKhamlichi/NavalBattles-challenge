@@ -32,7 +32,6 @@ public class ShipsPack {
             if (ship.isAlive())
                 return true;
         }
-
         return false;
     }
 
@@ -41,8 +40,8 @@ public class ShipsPack {
             applyBonusDamageToShips();
 
         for (Ship ship : ships) {
-            int damage = ship.getDamage();
-            battleStrategy.attack(shipsPack, damage);
+            int outputDamage = ship.getOutputDamage();
+            battleStrategy.attack(shipsPack, outputDamage);
         }
     }
 
@@ -60,7 +59,6 @@ public class ShipsPack {
 
         if(!shipToTakeDmg.isAlive())
             ships.remove(shipToTakeDmg);
-        System.out.println(ships+" - damage taken: "+damage+" - outnumbering :"+isOutnumbering);
     }
 
     public int getNumberOfShips() {

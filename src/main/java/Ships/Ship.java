@@ -35,7 +35,6 @@ public class Ship {
 
     public Ship(int tonsOfDisplacement, int numberOfMasts) {
         this(tonsOfDisplacement, numberOfMasts, 0);
-        calculateSpeed(tonsOfDisplacement, numberOfMasts);
     }
 
     private void calculateSpeed(int tonsOfDisplacement, int numberOfMasts) {
@@ -56,10 +55,14 @@ public class Ship {
         return canons.size() * Canon.damage;
     }
 
-    public int getDamage() {
+    public int getOutputDamage() {
         int canonsDamage = calculateCanonsDamage();
-        int bonusDamage = (int) (canonsDamage * ((float)bonusDamagePercentage / 100));
+        int bonusDamage = calculateBonusDamage(canonsDamage);
         return (canonsDamage + bonusDamage);
+    }
+
+    private int calculateBonusDamage(int canonsDamage) {
+        return (int) (canonsDamage * ((float)bonusDamagePercentage / 100));
     }
 
     public void takeOverallDamage(int damage) {

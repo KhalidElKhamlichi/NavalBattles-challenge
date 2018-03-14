@@ -29,9 +29,9 @@ public class BattleTest {
 
     @Test
     public void fightWithDifferentFirePower() {
-        Ships.Ship a = new Ships.Ship(2000, 1, 15); // 3k damage, 4500 hp (2000 + 1000 + 1500), can take 3 hits [should win]
+        Ship a = new Ship(2000, 1, 15); // 3k damage, 4500 hp (2000 + 1000 + 1500), can take 3 hits [should win]
         // 3k damage, 2000 hp (just displacement), can take 1 hits
-        Ships.Ship b = new Ships.Ship(3100, 1, 10); // 2k damage, 5100 hp (3100 + 1000 + 1000), can take 2 hits
+        Ship b = new Ship(3100, 1, 10); // 2k damage, 5100 hp (3100 + 1000 + 1000), can take 2 hits
         // 2k damage, 3000 hp (just displacement), can take 2 hits [wins]
 
         Battle battle = new Battle().side(a).against(b);
@@ -44,10 +44,10 @@ public class BattleTest {
     // each ship always target the same opponent until it's sunk (once sunk it can not participate to the fight anymore, nor count for the presence & calculation of the bonus)
     @Test
     public void packfight() {
-        Ships.Ship a = new Ships.Ship(65000, 3, 64);
-        Ships.Ship b = new Ships.Ship(23000, 1, 24);
-        Ships.Ship c = new Ships.Ship(23000, 1, 24);
-        Ships.Ship d = new Ships.Ship(23000, 1, 24);
+        Ship a = new Ship(65000, 3, 64);
+        Ship b = new Ship(23000, 1, 24);
+        Ship c = new Ship(23000, 1, 24);
+        Ship d = new Ship(23000, 1, 24);
 
         Battle battle = new Battle().side(a).against(b, c, d);
         assertThat(battle.isInTheWinningSide(b)).isTrue();
@@ -59,10 +59,10 @@ public class BattleTest {
     // this one comes for free as control group for next one :D
     @Test
     public void packfightLightBoat() {
-        Ships.Ship a = new Ships.Ship(65000, 3, 64);
-        Ships.Ship b = new Ships.Ship(15000, 1, 24);
-        Ships.Ship c = new Ships.Ship(15000, 1, 24);
-        Ships.Ship d = new Ships.Ship(15000, 1, 24);
+        Ship a = new Ship(65000, 3, 64);
+        Ship b = new Ship(15000, 1, 24);
+        Ship c = new Ship(15000, 1, 24);
+        Ship d = new Ship(15000, 1, 24);
 
         Battle battle = new Battle().side(a).against(b, c, d);
         assertThat(battle.isInTheWinningSide(a)).isTrue();
@@ -76,10 +76,10 @@ public class BattleTest {
     // a full destroyed hull means the ship has sunk
     @Test
     public void packfightLightBoatLocalized() {
-        Ships.Ship a = new Ships.Ship(65000, 3, 64);
-        Ships.Ship b = new Ships.Ship(23000, 1, 24);
-        Ships.Ship c = new Ships.Ship(23000, 1, 24);
-        Ships.Ship d = new Ships.Ship(23000, 1, 24);
+        Ship a = new Ship(65000, 3, 64);
+        Ship b = new Ship(23000, 1, 24);
+        Ship c = new Ship(23000, 1, 24);
+        Ship d = new Ship(23000, 1, 24);
 
         Battle battle = new Battle(LOCALIZED_DAMAGES).side(a).against(b, c, d);
         assertThat(battle.isInTheWinningSide(b)).isTrue();

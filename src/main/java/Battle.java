@@ -1,6 +1,5 @@
 import BattleStrategy.BattleStrategy;
 import BattleStrategy.StandardBattleStrategy;
-import BattleStrategy.LocalizedStrategy;
 import Ships.Ship;
 import Ships.ShipsPack;
 
@@ -9,8 +8,6 @@ public class Battle {
     private ShipsPack firstPack;
     private ShipsPack secondPack;
 
-//    private BattleStrategy battleStrategy;
-
     public Battle() {
         BattleStrategy battleStrategy = new StandardBattleStrategy();
         firstPack = new ShipsPack(battleStrategy);
@@ -18,7 +15,7 @@ public class Battle {
     }
 
     public Battle(int localized) {
-        BattleStrategy battleStrategy = new LocalizedStrategy();
+        BattleStrategy battleStrategy = new BattleStrategy.LocalizedBattleStrategy();
         firstPack = new ShipsPack(battleStrategy);
         secondPack = new ShipsPack(battleStrategy);
     }
@@ -44,6 +41,7 @@ public class Battle {
     private void startBattle() {
 
         setOutnumberingPack();
+
         while (true) {
             firstPack.attack(secondPack);
             if(!secondPack.isAlive())
