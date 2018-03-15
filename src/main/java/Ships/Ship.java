@@ -1,5 +1,9 @@
 package Ships;
 
+import Ships.Parts.Canon;
+import Ships.Parts.Hull;
+import Ships.Parts.Mast;
+
 import java.util.ArrayList;
 import java.util.List;
 
