@@ -46,16 +46,12 @@ public class Ship {
         speed -= speed * speedPenalty;
     }
 
-    public boolean isAlive() {
-        return totalHp > 0 && !hull.isDestroyed();
+    public int getOutputDamage() {
+        return calculateCanonsDamage();
     }
 
     private int calculateCanonsDamage() {
         return canons.size() * Canon.damage;
-    }
-
-    public int getOutputDamage() {
-        return calculateCanonsDamage();
     }
 
     public void takeOverallDamage(int damage) {
@@ -90,6 +86,10 @@ public class Ship {
     public void takeDamageToHull(int damage) {
         hull.takeDamage(damage);
 
+    }
+
+    public boolean isAlive() {
+        return totalHp > 0 && !hull.isDestroyed();
     }
 
     public float getSpeed() {
