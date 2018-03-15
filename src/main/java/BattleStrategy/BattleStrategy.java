@@ -1,8 +1,8 @@
 package BattleStrategy;
 
-import Ships.ShipsPack;
+import Ships.Fleet;
 
 public interface BattleStrategy {
 
-    void attack(ShipsPack shipsPack, int damage);
+    void attack(Fleet fleet, int damage);
 }

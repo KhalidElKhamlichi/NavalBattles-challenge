@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ShipsPack {
+public class Fleet {
 
     private List<Ship> ships;
     private BattleStrategy battleStrategy;
@@ -15,12 +15,32 @@ public class ShipsPack {
 
     private final int bonusDamagePercentage = 15;
 
-    public ShipsPack(BattleStrategy battleStrategy) {
+    public Fleet(BattleStrategy battleStrategy) {
         this.battleStrategy = battleStrategy;
     }
 
     public void add(Ship... ships) {
         this.ships = new ArrayList<>(Arrays.asList(ships));
+    }
+
+    public void attack(Fleet fleet) {
+
+        for (Ship ship : ships) {
+            int outputDamage = ship.getOutputDamage();
+            outputDamage = applyBonusDamage(outputDamage);
+            battleStrategy.attack(fleet, outputDamage);
+        }
+    }
+
+    private int applyBonusDamage(int outputDamage) {
+        if(isOutnumbering)
+            outputDamage += getBonusDamage(outputDamage);
+        return outputDamage;
+    }
+
+    private float getBonusDamage(int damage) {
+        int numberOfAdditionalShips = ships.size() - 1;
+        return numberOfAdditionalShips * (damage * ((float)bonusDamagePercentage / 100));
     }
 
     public boolean has(Ship b) {
@@ -35,38 +55,12 @@ public class ShipsPack {
         return false;
     }
 
-    public void attack(ShipsPack shipsPack) {
-        if(isOutnumbering)
-            applyBonusDamageToShips();
-
-        for (Ship ship : ships) {
-            int outputDamage = ship.getOutputDamage();
-            battleStrategy.attack(shipsPack, outputDamage);
-        }
-    }
-
-    private void applyBonusDamageToShips() {
-        int numberOfAdditionalShips = ships.size() - 1;
-
-        for(Ship ship : ships) {
-            ship.applyBonusDamage(numberOfAdditionalShips * bonusDamagePercentage);
-        }
-    }
-
     public void takeOverallDamage(int damage) {
         Ship shipToTakeDmg = ships.get(0);
         shipToTakeDmg.takeOverallDamage(damage);
 
         if(!shipToTakeDmg.isAlive())
             ships.remove(shipToTakeDmg);
-    }
-
-    public int getNumberOfShips() {
-        return ships.size();
-    }
-
-    public void setOutnumbering(boolean outnumbering) {
-        isOutnumbering = outnumbering;
     }
 
     public boolean hasCanons() {
@@ -87,5 +81,13 @@ public class ShipsPack {
 
     public void takeDamageToHull(int damage) {
         ships.get(0).takeDamageToHull(damage);
+    }
+
+    public int getNumberOfShips() {
+        return ships.size();
+    }
+
+    public void setOutnumbering(boolean outnumbering) {
+        isOutnumbering = outnumbering;
     }
 }

@@ -1,12 +1,12 @@
 package BattleStrategy;
 
-import Ships.ShipsPack;
+import Ships.Fleet;
 
 public class StandardBattleStrategy implements BattleStrategy {
 
     @Override
-    public void attack(ShipsPack shipsPack, int damage) {
-        shipsPack.takeOverallDamage(damage);
+    public void attack(Fleet fleet, int damage) {
+        fleet.takeOverallDamage(damage);
 
     }
 }

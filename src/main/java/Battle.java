@@ -1,23 +1,22 @@
-import BattleStrategy.BattleStrategy;
-import BattleStrategy.StandardBattleStrategy;
+import BattleStrategy.*;
 import Ships.Ship;
-import Ships.ShipsPack;
+import Ships.Fleet;
 
 public class Battle {
 
-    private ShipsPack firstPack;
-    private ShipsPack secondPack;
+    private Fleet firstPack;
+    private Fleet secondPack;
 
     public Battle() {
         BattleStrategy battleStrategy = new StandardBattleStrategy();
-        firstPack = new ShipsPack(battleStrategy);
-        secondPack = new ShipsPack(battleStrategy);
+        firstPack = new Fleet(battleStrategy);
+        secondPack = new Fleet(battleStrategy);
     }
 
     public Battle(int localized) {
-        BattleStrategy battleStrategy = new BattleStrategy.LocalizedBattleStrategy();
-        firstPack = new ShipsPack(battleStrategy);
-        secondPack = new ShipsPack(battleStrategy);
+        BattleStrategy battleStrategy = new LocalizedBattleStrategy();
+        firstPack = new Fleet(battleStrategy);
+        secondPack = new Fleet(battleStrategy);
     }
 
     public boolean isInTheWinningSide(Ship ship) {

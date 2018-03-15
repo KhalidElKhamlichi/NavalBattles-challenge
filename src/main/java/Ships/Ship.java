@@ -8,7 +8,6 @@ public class Ship {
     private List<Canon> canons;
     private List<Mast> masts;
     private Hull hull;
-    private int bonusDamagePercentage = 0;
     private int totalHp;
     protected float speed;
     
@@ -47,22 +46,12 @@ public class Ship {
         return totalHp > 0 && !hull.isDestroyed();
     }
 
-    public void applyBonusDamage(int bonusDamagePercentage) {
-        this.bonusDamagePercentage = bonusDamagePercentage;
-    }
-
     private int calculateCanonsDamage() {
         return canons.size() * Canon.damage;
     }
 
     public int getOutputDamage() {
-        int canonsDamage = calculateCanonsDamage();
-        int bonusDamage = calculateBonusDamage(canonsDamage);
-        return (canonsDamage + bonusDamage);
-    }
-
-    private int calculateBonusDamage(int canonsDamage) {
-        return (int) (canonsDamage * ((float)bonusDamagePercentage / 100));
+        return calculateCanonsDamage();
     }
 
     public void takeOverallDamage(int damage) {

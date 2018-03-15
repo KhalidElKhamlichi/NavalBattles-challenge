@@ -1,23 +1,23 @@
 package BattleStrategy;
 
-import Ships.ShipsPack;
+import Ships.Fleet;
 
 public class LocalizedBattleStrategy implements BattleStrategy {
 
     @Override
-    public void attack(ShipsPack shipsPack, int damage) {
+    public void attack(Fleet fleet, int damage) {
 
-        if(shipsPack.hasMast()) {
-            shipsPack.takeDamageToMast(damage);
+        if(fleet.hasMast()) {
+            fleet.takeDamageToMast(damage);
             return;
         }
 
-        if(shipsPack.hasCanons()) {
-            shipsPack.takeDamageToCanon(damage);
+        if(fleet.hasCanons()) {
+            fleet.takeDamageToCanon(damage);
             return;
         }
 
-        shipsPack.takeDamageToHull(damage);
+        fleet.takeDamageToHull(damage);
 
     }
 }
